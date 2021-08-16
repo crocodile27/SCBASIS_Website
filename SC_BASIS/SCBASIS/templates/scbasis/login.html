@@ -1,0 +1,28 @@
+{% extends "scbasis/layout.html" %}
+
+{% block body %}
+{% load static %}
+<link rel="stylesheet" type="text/css" href="{% static 'scbasis/login_and_register/styles.css' %}">
+
+    <h2>Login</h2>
+
+    {% if message %}
+        <div>{{ message }}</div>
+    {% endif %}
+
+    <form action="{% url 'login' %}" method="post">
+        {% csrf_token %}
+        <div class="form-group">
+            <label>Username</label>
+            <input autofocus class="form-control" type="text" name="username" placeholder="Username">
+        </div>
+        <div class="form-group">
+            <label>Password</label>
+            <input class="form-control" type="password" name="password" placeholder="Password">
+        </div>
+        <input class="submit-button" type="submit" value="Login">
+    </form>
+
+    <section class="alternative">Don't have an account? <a href="{% url 'register' %}">Register here.</a></section>
+
+{% endblock %}

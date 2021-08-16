@@ -1,0 +1,25 @@
+
+  
+form{
+  padding: 20px;
+}
+
+.form-control{
+  width: 30%;
+}
+
+.submit-button{
+  margin-top: 15px;
+  background-color: teal; 
+  padding-left: 10px;
+  padding-right: 10px;
+  padding-top: 7px;
+  padding-bottom: 7px;
+  color: white;
+  border: none;
+  border-radius: 10px;
+}
+
+.alternative{
+  margin-left: 20px;
+}

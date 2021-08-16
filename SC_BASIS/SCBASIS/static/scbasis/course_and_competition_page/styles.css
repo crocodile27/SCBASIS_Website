@@ -1,0 +1,24 @@
+
+.container{
+  padding-left: 50px;
+  padding-left: 50px;
+  margin-bottom: 50px;
+}
+
+.course_list{
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+}
+.course_name{
+  display: block;
+  color: teal;
+  font-size: 1em;
+  text-decoration: none;
+  margin-left: 20px;
+}
+
+a{
+  text-decoration: none;
+}
+

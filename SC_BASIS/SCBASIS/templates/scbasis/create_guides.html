@@ -1,0 +1,111 @@
+{% extends "scbasis/layout.html" %}
+
+{% block body %}
+{% load static %}
+<script charset="utf-8" src="{% static 'scbasis/app.js' %}"></script>
+<link rel="stylesheet" type="text/css" href="{% static 'scbasis/create_guides/styles.css' %}">
+    <h2 id='heading'>Create A Guide</h2>
+    <section class="add-padding">
+      <label>Choose to write a guide for:</label>
+      
+        <div class="span">
+          <button class="choice" id="course-button">Course</button>
+          <button class="choice" id="competition-button">Competition</button>
+        </div>
+     
+
+      <form id="courseForm" action ="{% url 'submit_courses'%}" method="post"  enctype="multipart/form-data">
+        {% csrf_token %}
+          <div class="form-group">
+            <label>Name of Course</label>
+            <input type="text" name="name_of_course" class="form-control" id="exampleFormControlInput1">
+          </div>
+          <br>
+          <div class="form-group">
+            <label>Author</label>
+            <input type="text" name="author" class="form-control" id="exampleFormControlInput2">
+          </div>
+          <br>
+          <div class="form-group">
+            <label for="exampleFormControlTextarea1">Upload Markdown File</label>
+            
+            <p>
+              (Please include the Course Description and Recommended Resources. You can use Macdown for Mac systems and Typora for Windows systems to create this file)
+            </p>
+            <input type="file" class="form-control" id="myFile" name="course_description">
+
+
+            
+          </div>
+          
+          
+          <div class="form-group">
+              <label>Course Category</label>
+              <select name="course_category" class="form-select" aria-label="Default select example">
+                  <option selected>Open this select menu</option>
+                  <option value="Math">Math</option>
+                  <option value="English">English</option>
+                  <option value="Science">Science</option>
+                  <option value="Humanities">Humanities</option>
+                  <option value="Others">Others</option>
+              </select>
+          </div><br>
+
+          <div class="form-group">
+            <label>Image URL for heading image</label>
+            <input type="text" name="image_url" class="form-control" id="exampleFormControlInput1">
+          </div>
+          <br>
+          <button class="submit-button" type="submit">Submit</button>
+
+      </form>
+
+      <form id="competitionForm" action ="{% url 'submit_competitions'%}" method="post">
+        {% csrf_token %}
+          <div class="form-group">
+            
+            <label>Name of Competition</label>
+            
+            <input type="text" name="name_of_competition" class="form-control" id="exampleFormControlInput1">
+          </div>
+
+          <div class="form-group">
+            <label>Author</label>
+            <input type="text" name="author" class="form-control" id="exampleFormControlInput2">
+          </div>
+          <br>
+          <div class="form-group">
+            <label for="exampleFormControlTextarea1">Upload Markdown File</label>
+            
+            <p>
+              (Please include the Course Description and Recommended Resources. You can use Macdown for Mac systems and Typora for Windows systems to create this file)
+            </p>
+            <input type="file" class="form-control" id="myFile" name="course_description">
+
+
+            
+          </div>
+          <br>
+          <div class="form-group">
+              <label>Competition Category</label>
+              <select name="competition_category" class="form-select" aria-label="Default select example">
+                  <option selected>Open this select menu</option>
+                  <option value="Math">Math</option>
+                  <option value="Economics">Economics</option>
+                  <option value="Biology">Biology</option>
+                  <option value="Chemistry">Chemistry</option>
+                  <option value="Physics">Physics</option>
+                  <option value="Others">Others</option>
+              </select>
+          </div><br>
+
+          <div class="form-group">
+            <label>Image URL for heading image</label>
+            <input type="text" name="image_url" class="form-control" id="exampleFormControlInput1">
+          </div><br>
+
+          <button class="submit-button" type="submit">Submit</button>
+
+      </form>
+    </section>
+{% endblock %}

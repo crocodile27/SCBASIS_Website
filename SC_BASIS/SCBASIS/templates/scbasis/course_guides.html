@@ -1,0 +1,49 @@
+
+{% extends "scbasis/layout.html" %}
+
+{% block body %}
+{% load static %}
+<link rel="stylesheet" type="text/css" href="{% static 'scbasis/course_and_competition_page/styles.css' %}">
+    
+        <h2 id='heading'>Course Guides</h2>
+        <br>
+        <div class = "container">
+        <label>Math Courses</label>
+            <ul class="course_list">
+            {% for course in math_courses %}
+                <a href="{% url 'display_courses' course.id %}">
+                <li class="course_name">{{course.name_of_course}}</li>
+                </a>
+            {% endfor %}
+            </ul>
+        <br>
+        <label>English Courses</label>
+            <ul class="course_list">
+            {% for course in english_courses %}
+                <a href="{% url 'display_courses' course.id %}">
+                <li class="course_name">{{course.name_of_course}}</li>
+                </a>
+            {% endfor %}
+            </ul>
+        <br>
+        <label>Science Courses</label>
+            <ul class="course_list">
+        {% for course in science_courses %}
+            <a href="{% url 'display_courses' course.id %}">
+            <li class="course_name">{{course.name_of_course}}</li>
+            </a>
+        {% endfor %}
+            </ul>
+        <br>
+        <label>Humanities Courses</label>
+            <ul class="course_list">
+        {% for course in humanities_courses %}
+            <a href="{% url 'display_courses' course.id %}">
+            <li class="course_name">{{course.name_of_course}}</li>
+            </a>
+        {% endfor %}
+            </ul>
+        <br>
+    </div>
+    
+{% endblock %}

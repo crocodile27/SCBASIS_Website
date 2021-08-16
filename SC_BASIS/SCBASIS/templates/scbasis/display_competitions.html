@@ -1,0 +1,16 @@
+{% extends "scbasis/layout.html" %}
+
+{% block body %}
+{% load static %}
+<link rel="stylesheet" type="text/css" href="{% static 'scbasis/display_pages/styles.css' %}">
+<img class="header-image" src="{{guide.url_of_image}}">
+   <h2 id="heading">{{ guide.name_of_competition }}</h2>
+   <section class="guide-content">
+         <p class="editor">Editor: {{ guide.editor }}</p>
+         <p>Date created: {{ guide.date_created }}</p>
+      <br>
+   <h3>Competition Description</h3>
+   <p class="content-elements">{{ competition_description|safe }}</p>
+   <p class='thanks'>Thanks for reading!</p>
+</section>
+{% endblock %}

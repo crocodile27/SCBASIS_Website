@@ -1,0 +1,67 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <title>{% block title %}SCBASIS{% endblock %}</title>
+        
+        <link href="{% static 'scbasis/index_page/styles.css' %}" rel="stylesheet">
+
+    </head>
+    <body>
+
+        <header>
+            <img src="{% static 'scbasis/layout_page/SCBASIS.png'%}">
+        <p>SCBASIS</p></header>
+        <section class="showcase">
+        
+        <video src="{% static 'scbasis/index_page/video.mp4'%}" muted loop autoplay></video>
+        <div class="overlay"></div>
+        <div class="text">
+        
+            <h4 id="index_page_heading">Free Guides</h4>
+            <h4 id="index_page_heading">& Forum</h4>
+        </div>
+        <div id='username-info'>
+            {% if user.is_authenticated %}
+                Signed in as <strong>{{ user.username }}</strong>.
+            {% else %}
+                Not signed in.
+            {% endif %}
+        </div>
+        <div class="menu">
+            <ul>
+                    <li>
+                        <a class="nav-link" href="{% url 'index' %}">Home</a>
+                    </li>
+                    {% if user.is_authenticated %}
+                    <li>
+                        <a class="nav-link" href="{% url 'create_guides' %}">Create Guides</a>
+                    </li>
+                    {% endif %}
+                    <li>
+                        <a href="{% url 'course_guides'%}">Course Guides</a>
+                    </li>
+                    <li>
+                        <a href="{% url 'competition_guides'%}">Competition Guides</a>
+                    </li>
+                {% if user.is_authenticated %}
+                    <li class="nav-item">
+                        <a class="nav-link" href="{% url 'logout' %}">Log Out</a>
+                    </li>
+                {% else %}
+                    <li class="nav-item">
+                        <a class="nav-link" href="{% url 'login' %}">Log In</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{% url 'register' %}">Register</a>
+                    </li>
+                {% endif %}
+            </ul>
+        </div>
+        </section>
+        <hr>
+        {% block body %}
+        {% endblock %}
+    </body>
+</html>

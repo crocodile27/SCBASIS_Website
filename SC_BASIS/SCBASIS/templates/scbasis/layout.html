@@ -1,0 +1,63 @@
+{% load static %} 
+ 
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <title>{% block title %}SCBASIS{% endblock %}</title>
+        <link href="{% static 'scbasis/layout_page/styles.css' %}" rel="stylesheet">
+
+    </head>
+    <body>
+
+        
+            <header>
+                <section class="text">
+                    <div class='row'>
+                        <img class="scbasis" src="{% static 'scbasis/layout_page/SCBASIS.png'%}">
+                        <h1 id="scbasis-title">SCBASIS</h1>
+                    </div>
+                    
+                    <h4>A resource website and platform for student voices</h4>
+                    <div id="username-info">
+                        {% if user.is_authenticated %}
+                            Signed in as <strong>{{ user.username }}</strong>.
+                        {% else %}
+                            Not signed in.
+                        {% endif %}
+                    </div>
+                </section>
+            </header>
+            <ul class="nav">
+                    <li class="nav-item">
+                        <a class="nav-link" href="{% url 'index' %}">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{% url 'course_guides'%}">Course Guides</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{% url 'competition_guides' %}">Competition Guides</a>
+                    </li>
+                    
+                {% if user.is_authenticated %}
+                    <li class="nav-item">
+                        <a class="nav-link" href="{% url 'create_guides' %}">Create Guides</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{% url 'logout' %}">Log Out</a>
+                    </li>
+                {% else %}
+                    <li class="nav-item">
+                        <a class="nav-link" href="{% url 'login' %}">Log In</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{% url 'register' %}">Register</a>
+                    </li>
+                {% endif %}
+            </ul>
+           
+        
+        {% block body %}
+        {% endblock %}
+        
+    </body>
+</html>

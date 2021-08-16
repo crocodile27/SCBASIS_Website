@@ -1,0 +1,96 @@
+@import url('https://fonts.googleapis.com/css?family=Poppins:200,300,400,500,600,700,800,900&display=swap');
+*
+{
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: 'Poppins', sans-serif;
+}
+header{
+	background-color: #007071;
+}
+
+.scbasis{
+	float: left;
+	max-height: 70px;
+	margin-right: 20px;
+}
+.text{
+	padding: 20px;
+}
+
+.row{
+	display: inline-block;
+}
+
+#scbasis-title{
+	font-size: 3em;
+	font-weight: 600;
+	color: white;
+	float: right;
+}
+
+
+#heading{
+  margin-top: 10px;
+  margin-left: 30px;
+  margin-right: 10px;
+  color: teal;
+  font-size: 3em;
+}
+
+h4{
+	font-size: 1em;
+	color: white;
+	font-weight: 400;
+	margin-left: 20px;
+}
+
+button{
+	border: none;
+}
+
+
+label{
+  margin-bottom: 5px;
+  font-weight: 400;
+  font-size: 1.2em;
+  display: block;
+}
+
+#username-info {
+    font-size: 1.2em;
+    font-weight: 600;
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    z-index: 11;
+    color: white;
+    
+}
+
+.nav {
+  list-style-type: none;
+  margin: 0;
+  padding: 10px;
+  overflow: hidden;
+  background-color: darkseagreen;
+
+}
+
+.nav-item {
+	float: left;
+
+}
+
+
+li a {
+   	color: white;
+  	text-align: center;
+  	padding: 14px 20px;
+  	text-decoration: none;
+}
+
+li a:hover {
+  background-color: darkturquoise;
+}
