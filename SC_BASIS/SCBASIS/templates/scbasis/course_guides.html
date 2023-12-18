@@ -44,6 +44,15 @@
         {% endfor %}
             </ul>
         <br>
+        <label>Other Courses</label>
+            <ul class="course_list">
+        {% for course in other_courses %}
+            <a href="{% url 'display_courses' course.id %}">
+            <li class="course_name">{{course.name_of_course}}</li>
+            </a>
+        {% endfor %}
+            </ul>
+        <br>
     </div>
     
 {% endblock %}

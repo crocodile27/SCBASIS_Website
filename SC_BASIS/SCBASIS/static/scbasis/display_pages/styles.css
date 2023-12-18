@@ -1,7 +1,7 @@
 
 .guide-content{
-	padding-left: 40px;
-	padding-right: 40px;
+	padding-left: 100px;
+	padding-right: 100px;
 	margin-bottom: 100px;
 }
 
@@ -10,17 +10,21 @@
 }
 
 h1{
-  color: black;
+  color: #d4af37;
+  font-size: 2.3em;
 }
 
 h2{
-	color: #d4af37;
+	color: teal;
+	font-size: 1.5em;
 }
 
 h3{
-	color: teal;
-	font-size: 2em;
+	color:teal;
+	font-size: 1.5em;
 }
+
+
 
 img {
 	max-width:50%;
@@ -29,11 +33,20 @@ img {
 	margin-right: auto;
 }
 
+a{
+	color:teal;
+}
+
 p{
 	margin-bottom: 20px;
 }
 
+ul, ol{
+	padding-left: 60px;
+}
+
 .thanks{
+	color: #d4af37;
 	margin-top: 40px;
 	font-weight: 500;
 	font-size: 1.6em;
