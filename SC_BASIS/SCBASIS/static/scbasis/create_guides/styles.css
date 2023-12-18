@@ -37,3 +37,9 @@ input{
 	color: white;
 	border: none;
 }
+
+.hint{
+	padding: 200px;
+	color:teal;
+	font-size:1em;
+}

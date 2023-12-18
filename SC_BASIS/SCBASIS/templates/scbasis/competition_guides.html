@@ -44,6 +44,13 @@
             </a>
         {% endfor %}
         <br>
+        <label>Speech and Debate Competitions</label>
+        {% for competition in speech_and_debate_competitions %}
+            <a href="{% url 'display_competitions' competition.id %}">
+            <li class="course_name">{{competition.name_of_competition}}</li>
+            </a>
+        {% endfor %}
+        <br>
     </div>
     
 {% endblock %}

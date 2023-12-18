@@ -32,12 +32,14 @@ def competition_guides(request):
     biology_competitions = Competitions.objects.filter(competition_category="Biology")
     chemistry_competitions = Competitions.objects.filter(competition_category="Chemistry")
     physics_competitions = Competitions.objects.filter(competition_category="Physics")
+    speech_and_debate_competition = Competitions.objects.filter(competition_category="Speech and Debate")
     return render(request, 'scbasis/competition_guides.html',{
         "math_competitions": math_competitions,
         "economic_competitions": economic_competitions,
         "biology_competitions": biology_competitions,
         "chemistry_competitions": chemistry_competitions,
         "physics_competitions": physics_competitions,
+        "speech_and_debate_competitions": speech_and_debate_competition,
         })
 
 def create_guides(request):
@@ -64,7 +66,7 @@ def submit_competitions(request):
     if request.method == "POST":
         name_of_competition = request.POST['name_of_competition']
         author=request.POST['author']
-        competition_description = request.POST['competition_description']
+        competition_description = request.FILES['competition_description']
         editor = request.user
         competition_category = request.POST['competition_category']
         url_of_image = request.POST['image_url']
@@ -90,8 +92,11 @@ def display_courses(request, course_id):
 
 def display_competitions(request, competition_id):
     guide = Competitions.objects.get(pk=competition_id)
+    title=guide.competition_description.read().decode("utf-8")
+    competition_description=markdown.markdown(title) if title else None
     return render(request, 'scbasis/display_competitions.html',{
         "guide":guide,
+        "competition_description":competition_description,
         })
 
 def login_view(request):
