@@ -1,12 +1,11 @@
-Sam Shi
-BIGZ
-Class of 2022
-Got As in this course 
+Sam Shi<br>
+BIGZ<br>
+Class of 2022<br>
+Got As in this course<br>
 
 This is a **knowledge-based** course because you will need to know what happened in books that teacher asked you to read. You will need some literary skills for doing well in this course. 
 
 To do well, it is better if you have taken some English language or literature courses and read some serious classics. This is also a **required** course to take in 9th grade and a pre-AP course for AP English Literature in grade 10 (not offered in all schools).
-
 
 ###Difficulty
 
