@@ -1,1 +1,1 @@
-web: gunicorn SC_BASIS.wsgi
+web: gunicorn SC_BASIS:application -b xx.xxx.xxx.xx:8000
