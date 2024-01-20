@@ -1,1 +1,1 @@
-web: gunicorn SCBASIS.wsgi --log-file -
+web: gunicorn SC_BASIS.wsgi --log-file -
