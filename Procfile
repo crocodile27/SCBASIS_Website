@@ -1,1 +1,1 @@
-web: gunicorn SC_BASIS.wsgi
+web: gunicorn SC_BASIS/SC_BASIS.wsgi
