@@ -88,10 +88,8 @@ TEMPLATES = [
 WSGI_APPLICATION = 'SC_BASIS.wsgi.application'
 
 
-
 # Database
-# https://docs.djangoproject.com/en/5.0/ref/settings/#databases
-
+# https://docs.djangoproject.com/en/3.1/ref/settings/#databases
 if IS_HEROKU_APP:
     # In production on Heroku the database configuration is derived from the `DATABASE_URL`
     # environment variable by the dj-database-url package. `DATABASE_URL` will be set
@@ -106,12 +104,10 @@ if IS_HEROKU_APP:
         ),
     }
 else:
-    # When running locally in development or in CI, a sqlite database file will be used instead
-    # to simplify initial setup. Longer term it's recommended to use Postgres locally too.
     DATABASES = {
-        "default": {
-            "ENGINE": "django.db.backends.sqlite3",
-            "NAME": BASE_DIR / "db.sqlite3",
+        'default': {
+            'ENGINE': 'django.db.backends.sqlite3',
+            'NAME': os.path.join(BASE_DIR , 'db.sqlite3'),
         }
     }
 
