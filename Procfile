@@ -1,1 +1,0 @@
-web: gunicorn SC_BASIS.wsgi
