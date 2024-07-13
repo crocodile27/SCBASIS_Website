@@ -14,9 +14,11 @@ section{
 	background-color: lightblue;
 	height: 100px;
 	width: 100px;
-	margin: 10px;
+	padding: 10px;
 	border-radius: 10px;
+	margin: 10px
 }
+
 .choice:hover{
 	background-color: darkturquoise;
 }
@@ -38,8 +40,8 @@ input{
 	border: none;
 }
 
-.hint{
-	padding: 200px;
+.bottom-hint{
+	padding:10px;
 	color:teal;
 	font-size:1em;
 }

@@ -1,5 +1,5 @@
 {% extends "scbasis/layout.html" %}
-
+ 
 {% block body %}
 {% load static %}
     <link rel="stylesheet" type="text/css" href="{% static 'scbasis/course_and_competition_page/styles.css' %}">
@@ -17,28 +17,28 @@
         </ul>
         <br>
         <label>Economic Competitions</label>
-        {% for competition in english_competitions %}
+        {% for competition in economic_competitions %}
             <a href="{% url 'display_competitions' competition.id %}">
             <li class="course_name">{{competition.name_of_competition}}</li>
             </a>
         {% endfor %}
         <br>
         <label>Biology Competitions</label>
-        {% for competition in science_competitions %}
+        {% for competition in biology_competitions %}
             <a href="{% url 'display_competitions' competition.id %}">
             <li class="course_name">{{competition.name_of_competition}}</li>
             </a>
         {% endfor %}
         <br>
         <label>Chemistry Competitions</label>
-        {% for competition in humanitites_competitions %}
+        {% for competition in chemistry_competitions %}
             <a href="{% url 'display_competitions' competition.id %}">
             <li class="course_name">{{competition.name_of_competition}}</li>
             </a>
         {% endfor %}
         <br>
         <label>Physics Competitions</label>
-        {% for competition in humanitites_competitions %}
+        {% for competition in physics_competitions %}
             <a href="{% url 'display_competitions' competition.id %}">
             <li class="course_name">{{competition.name_of_competition}}</li>
             </a>

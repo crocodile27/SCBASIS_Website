@@ -9,95 +9,154 @@ from .models import User, Courses, Competitions
 
 # Create your views here.
 
+
 def index(request):
-	return render(request, 'scbasis/index.html')
+    return render(request, "scbasis/index.html")
+
 
 def course_guides(request):
-    math_courses = Courses.objects.filter(course_category="Math")
-    english_courses = Courses.objects.filter(course_category="English")
-    science_courses = Courses.objects.filter(course_category="Science")
-    humanities_courses = Courses.objects.filter(course_category="Humanities")
-    other_courses = Courses.objects.filter(course_category="Others")
-    return render(request, 'scbasis/course_guides.html', {
-        "math_courses":math_courses,
-        "english_courses":english_courses,
-        "science_courses":science_courses,
-        "humanities_courses":humanities_courses,
-        "other_courses":other_courses,
-    })
+    math_courses = Courses.objects.filter(course_category="Math").filter(viewable=True)
+    english_courses = Courses.objects.filter(course_category="English").filter(
+        viewable=True
+    )
+    science_courses = Courses.objects.filter(course_category="Science").filter(
+        viewable=True
+    )
+    humanities_courses = Courses.objects.filter(course_category="Humanities").filter(
+        viewable=True
+    )
+    other_courses = Courses.objects.filter(course_category="Others").filter(
+        viewable=True
+    )
+    return render(
+        request,
+        "scbasis/course_guides.html",
+        {
+            "math_courses": math_courses,
+            "english_courses": english_courses,
+            "science_courses": science_courses,
+            "humanities_courses": humanities_courses,
+            "other_courses": other_courses,
+        },
+    )
+
 
 def competition_guides(request):
-    math_competitions = Competitions.objects.filter(competition_category="Math")
-    economic_competitions = Competitions.objects.filter(competition_category="Economic")
-    biology_competitions = Competitions.objects.filter(competition_category="Biology")
-    chemistry_competitions = Competitions.objects.filter(competition_category="Chemistry")
-    physics_competitions = Competitions.objects.filter(competition_category="Physics")
-    speech_and_debate_competition = Competitions.objects.filter(competition_category="Speech and Debate")
-    return render(request, 'scbasis/competition_guides.html',{
-        "math_competitions": math_competitions,
-        "economic_competitions": economic_competitions,
-        "biology_competitions": biology_competitions,
-        "chemistry_competitions": chemistry_competitions,
-        "physics_competitions": physics_competitions,
-        "speech_and_debate_competitions": speech_and_debate_competition,
-        })
+    math_competitions = Competitions.objects.filter(competition_category="Math").filter(
+        viewable=True
+    )
+    economic_competitions = Competitions.objects.filter(
+        competition_category="Economics"
+    ).filter(viewable=True)
+    biology_competitions = Competitions.objects.filter(
+        competition_category="Biology"
+    ).filter(viewable=True)
+    chemistry_competitions = Competitions.objects.filter(
+        competition_category="Chemistry"
+    ).filter(viewable=True)
+    physics_competitions = Competitions.objects.filter(
+        competition_category="Physics"
+    ).filter(viewable=True)
+    speech_and_debate_competition = Competitions.objects.filter(
+        competition_category="Speech and Debate"
+    ).filter(viewable=True)
+    return render(
+        request,
+        "scbasis/competition_guides.html",
+        {
+            "math_competitions": math_competitions,
+            "economic_competitions": economic_competitions,
+            "biology_competitions": biology_competitions,
+            "chemistry_competitions": chemistry_competitions,
+            "physics_competitions": physics_competitions,
+            "speech_and_debate_competitions": speech_and_debate_competition,
+        },
+    )
+
 
 def create_guides(request):
-    return render(request, 'scbasis/create_guides.html')
+    return render(request, "scbasis/create_guides.html")
+
 
 def submit_courses(request):
     if request.method == "POST":
-        name_of_course = request.POST['name_of_course']
-        author = request.POST['author']
-        course_description = request.FILES['course_description']
+        name_of_course = request.POST["name_of_course"]
+        author = request.POST["author"]
+        course_description = request.FILES["course_description"]
         editor = request.user
-        course_category = request.POST['course_category']
-        url_of_image = request.POST['image_url']
+        course_category = request.POST["course_category"]
+        url_of_image = request.POST["image_url"]
 
-        course = Courses(name_of_course=name_of_course, author=author, course_description=course_description, editor=editor, course_category=course_category, url_of_image=url_of_image)
+        course = Courses(
+            name_of_course=name_of_course,
+            author=author,
+            course_description=course_description,
+            editor=editor,
+            course_category=course_category,
+            url_of_image=url_of_image,
+            viewable=False,
+        )
         course.save()
-        
+
         return HttpResponseRedirect(reverse("index"))
-        #User is returned to the index page
+        # User is returned to the index page
     return render(request, "scbasis/create_guides.html")
-    #or else they are asked to retry to create a listing.
+    # or else they are asked to retry to create a listing.
+
 
 def submit_competitions(request):
     if request.method == "POST":
-        name_of_competition = request.POST['name_of_competition']
-        author=request.POST['author']
-        competition_description = request.FILES['competition_description']
+        name_of_competition = request.POST["name_of_competition"]
+        author = request.POST["author"]
+        competition_description = request.FILES["competition_description"]
         editor = request.user
-        competition_category = request.POST['competition_category']
-        url_of_image = request.POST['image_url']
+        competition_category = request.POST["competition_category"]
+        url_of_image = request.POST["image_url"]
 
-        competition = Competitions(name_of_competition=name_of_competition, author=author, competition_description=competition_description, editor=editor, competition_category=competition_category, url_of_image=url_of_image)
+        competition = Competitions(
+            name_of_competition=name_of_competition,
+            author=author,
+            competition_description=competition_description,
+            editor=editor,
+            competition_category=competition_category,
+            url_of_image=url_of_image,
+            viewable=False,
+        )
         competition.save()
-        
-        return HttpResponseRedirect(reverse("index"))
-        #User is returned to the index page
-    return render(request, "scbasis/create_guides.html")
-    #or else they are asked to retry to create a listing.
 
+        return HttpResponseRedirect(reverse("index"))
+        # User is returned to the index page
+    return render(request, "scbasis/create_guides.html")
+    # or else they are asked to retry to create a listing.
 
 
 def display_courses(request, course_id):
     guide = Courses.objects.get(pk=course_id)
-    title=guide.course_description.read().decode("utf-8")
-    course_description=markdown.markdown(title) if title else None
-    return render(request, 'scbasis/display_courses.html',{
-        "guide":guide,
-        "course_description":course_description,
-        })
+    title = guide.course_description.read().decode("utf-8")
+    course_description = markdown.markdown(title) if title else None
+    return render(
+        request,
+        "scbasis/display_courses.html",
+        {
+            "guide": guide,
+            "course_description": course_description,
+        },
+    )
+
 
 def display_competitions(request, competition_id):
     guide = Competitions.objects.get(pk=competition_id)
-    title=guide.competition_description.read().decode("utf-8")
-    competition_description=markdown.markdown(title) if title else None
-    return render(request, 'scbasis/display_competitions.html',{
-        "guide":guide,
-        "competition_description":competition_description,
-        })
+    title = guide.competition_description.read().decode("utf-8")
+    competition_description = markdown.markdown(title) if title else None
+    return render(
+        request,
+        "scbasis/display_competitions.html",
+        {
+            "guide": guide,
+            "competition_description": competition_description,
+        },
+    )
+
 
 def login_view(request):
     if request.method == "POST":
@@ -112,9 +171,11 @@ def login_view(request):
             login(request, user)
             return HttpResponseRedirect(reverse("index"))
         else:
-            return render(request, "scbasis/login.html", {
-                "message": "Invalid username and/or password."
-            })
+            return render(
+                request,
+                "scbasis/login.html",
+                {"message": "Invalid username and/or password."},
+            )
     else:
         return render(request, "scbasis/login.html")
 
@@ -133,18 +194,18 @@ def register(request):
         password = request.POST["password"]
         confirmation = request.POST["confirmation"]
         if password != confirmation:
-            return render(request, "scbasis/register.html", {
-                "message": "Passwords must match."
-            })
+            return render(
+                request, "scbasis/register.html", {"message": "Passwords must match."}
+            )
 
         # Attempt to create new user
         try:
             user = User.objects.create_user(username, email, password)
             user.save()
         except IntegrityError:
-            return render(request, "scbasis/register.html", {
-                "message": "Username already taken."
-            })
+            return render(
+                request, "scbasis/register.html", {"message": "Username already taken."}
+            )
         login(request, user)
         return HttpResponseRedirect(reverse("index"))
     else:

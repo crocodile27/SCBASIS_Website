@@ -12,6 +12,12 @@ urlpatterns = [
     path("competition_guides", views.competition_guides, name="competition_guides"),
     path("submit_courses", views.submit_courses, name="submit_courses"),
     path("submit_competitions", views.submit_competitions, name="submit_competitions"),
-    path("<int:course_id>/display_courses", views.display_courses, name="display_courses"),
-    path("<int:competition_id>/display_competitions", views.display_competitions, name="display_competitions"),
+    path(
+        "<int:course_id>/display_courses", views.display_courses, name="display_courses"
+    ),
+    path(
+        "<int:competition_id>/display_competitions",
+        views.display_competitions,
+        name="display_competitions",
+    ),
 ]

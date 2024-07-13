@@ -12,23 +12,22 @@
           <button class="choice" id="course-button">Course</button>
           <button class="choice" id="competition-button">Competition</button>
         </div>
-     
-
+        <section class="add-padding"></section>
+        <!-- <h3 id='heading'>Course Guide</h3> -->
       <form id="courseForm" action ="{% url 'submit_courses'%}" method="post"  enctype="multipart/form-data">
         {% csrf_token %}
           <div class="form-group">
             <label>Name of Course</label>
-            <input type="text" name="name_of_course" class="form-control" id="exampleFormControlInput1">
+            <input type="text" name="name_of_course" class="form-control">
           </div>
           <br>
           <div class="form-group">
             <label>Author</label>
-            <input type="text" name="author" class="form-control" id="exampleFormControlInput2">
+            <input type="text" name="author" class="form-control">
           </div>
           <br>
           <div class="form-group">
-            <label for="exampleFormControlTextarea1">Upload Markdown File</label>
-            
+            <label>Upload Markdown File</label>
             <p>
               (Please include the Course Description and Recommended Resources. You can use Macdown for Mac systems and Typora for Windows systems to create this file)
             </p>
@@ -38,7 +37,7 @@
             
           </div>
           
-          
+          <br>
           <div class="form-group">
               <label>Course Category</label>
               <select name="course_category" class="form-select" aria-label="Default select example">
@@ -53,37 +52,36 @@
 
           <div class="form-group">
             <label>Image URL for heading image</label>
-            <input type="text" name="image_url" class="form-control" id="exampleFormControlInput1">
+            <input type="text" name="image_url" class="form-control">
           </div>
           <br>
           <button class="submit-button" type="submit">Submit</button>
 
       </form>
-
-      <form id="competitionForm" action ="{% url 'submit_competitions'%}" method="post">
+      
+      <!-- <h3 id='heading'>Competition Guide</h3> -->
+      <form id="competitionForm" action ="{% url 'submit_competitions'%}" method="post" enctype="multipart/form-data">
         {% csrf_token %}
           <div class="form-group">
             
             <label>Name of Competition</label>
             
-            <input type="text" name="name_of_competition" class="form-control" id="exampleFormControlInput1">
-          </div>
-
-          <div class="form-group">
-            <label>Author</label>
-            <input type="text" name="author" class="form-control" id="exampleFormControlInput2">
+            <input label="Name of Competition" type="text" name="name_of_competition" class="form-control">
           </div>
           <br>
           <div class="form-group">
-            <label for="exampleFormControlTextarea1">Upload Markdown File</label>
+            <label>Author</label>
+            <input type="text" name="author" class="form-control">
+          </div>
+          <br>
+          <div class="form-group">
+            <label>Upload Markdown File</label>
             
             <p>
               (Please include the Competition Description and Recommended Resources. You can use Macdown for Mac systems and Typora for Windows systems to create this file)
             </p>
             <input type="file" class="form-control" id="myFile" name="competition_description">
 
-
-            
           </div>
           <br>
           <div class="form-group">
@@ -101,13 +99,13 @@
 
           <div class="form-group">
             <label>Image URL for heading image</label>
-            <input type="text" name="image_url" class="form-control" id="exampleFormControlInput1">
+            <input type="text" name="image_url" class="form-control">
           </div><br>
 
           <button class="submit-button" type="submit">Submit</button>
 
       </form>
-    <container class="hint"><p> Don't know how to use markdown? Don't worry send us an email at scbsresourceweb.outlook.com with the above information and we will help you upload it to the website.</p>
+    <container class="bottom-hint"><p> Don't know how to use markdown? Don't worry send us an email at scbsresourceweb.outlook.com with the above information and we will help you upload it to the website.</p>
     </container>
 
     </section>
