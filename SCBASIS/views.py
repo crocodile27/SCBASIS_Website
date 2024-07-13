@@ -3,11 +3,14 @@ from django.db import IntegrityError
 from django.http import HttpResponse, HttpResponseRedirect
 from django.shortcuts import render
 from django.urls import reverse
+from django.contrib.auth.hashers import make_password
 import markdown
 
 from .models import User, Courses, Competitions
 
 # Create your views here.
+
+ALLOWED_FILE_TYPES = []
 
 
 def index(request):
@@ -80,13 +83,39 @@ def create_guides(request):
 
 def submit_courses(request):
     if request.method == "POST":
-        name_of_course = request.POST["name_of_course"]
-        author = request.POST["author"]
-        course_description = request.FILES["course_description"]
-        editor = request.user
-        course_category = request.POST["course_category"]
-        url_of_image = request.POST["image_url"]
+        name_of_course = request.POST.get("name_of_course", "")
+        author = request.POST.get("author", "")
+        course_description = request.FILES.get(
+            "course_description"
+        )  # Use .get() to avoid KeyError
+        course_category = request.POST.get("course_category", "")
+        url_of_image = request.POST.get("image_url", "")
+        if not name_of_course or author or course_category or url_of_image:
+            return render(
+                request,
+                "scbasis/create_guides.html",
+                {
+                    "error_overall_message": "Please fill in missing field/s.",
+                    "name_of_course": name_of_course,
+                    "author": author,
+                    "course_category": course_category,
+                    "url_of_image": url_of_image,
+                },
+            )
+        if not course_description:
+            return render(
+                request,
+                "scbasis/create_guides.html",
+                {
+                    "error_message": "Course description file is required.",
+                    "name_of_course": name_of_course,
+                    "author": author,
+                    "course_category": course_category,
+                    "url_of_image": url_of_image,
+                },
+            )
 
+        editor = request.user
         course = Courses(
             name_of_course=name_of_course,
             author=author,
@@ -94,25 +123,49 @@ def submit_courses(request):
             editor=editor,
             course_category=course_category,
             url_of_image=url_of_image,
-            viewable=False,
         )
         course.save()
 
         return HttpResponseRedirect(reverse("index"))
-        # User is returned to the index page
+
     return render(request, "scbasis/create_guides.html")
-    # or else they are asked to retry to create a listing.
 
 
 def submit_competitions(request):
     if request.method == "POST":
-        name_of_competition = request.POST["name_of_competition"]
-        author = request.POST["author"]
-        competition_description = request.FILES["competition_description"]
-        editor = request.user
-        competition_category = request.POST["competition_category"]
-        url_of_image = request.POST["image_url"]
+        name_of_competition = request.POST.get("name_of_competition", "")
+        author = request.POST.get("author", "")
+        competition_description = request.FILES.get(
+            "competition_description"
+        )  # Use .get() to avoid KeyError
+        competition_category = request.POST.get("competition_category", "")
+        url_of_image = request.POST.get("image_url", "")
+        if not name_of_competition or author or competition_category or url_of_image:
+            return render(
+                request,
+                "scbasis/create_guides.html",
+                {
+                    "error_overall_message": "Please fill in missing field.",
+                    "name_of_competition": name_of_competition,
+                    "author": author,
+                    "competition_category": competition_category,
+                    "url_of_image": url_of_image,
+                },
+            )
+        if not competition_description:
+            return render(
+                request,
+                "scbasis/create_guides.html",
+                {
+                    "error_message": "Competition description file is required.",
+                    "name_of_competition": name_of_competition,
+                    "author": author,
+                    "competition_category": competition_category,
+                    "url_of_image": url_of_image,
+                },
+            )
 
+        editor = request.user
         competition = Competitions(
             name_of_competition=name_of_competition,
             author=author,
@@ -120,14 +173,12 @@ def submit_competitions(request):
             editor=editor,
             competition_category=competition_category,
             url_of_image=url_of_image,
-            viewable=False,
         )
         competition.save()
 
         return HttpResponseRedirect(reverse("index"))
-        # User is returned to the index page
+
     return render(request, "scbasis/create_guides.html")
-    # or else they are asked to retry to create a listing.
 
 
 def display_courses(request, course_id):
@@ -192,6 +243,7 @@ def register(request):
 
         # Ensure password matches confirmation
         password = request.POST["password"]
+        hashed_password = make_password(password)
         confirmation = request.POST["confirmation"]
         if password != confirmation:
             return render(

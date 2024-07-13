@@ -4,111 +4,99 @@
 {% load static %}
 <script charset="utf-8" src="{% static 'scbasis/app.js' %}"></script>
 <link rel="stylesheet" type="text/css" href="{% static 'scbasis/create_guides/styles.css' %}">
-    <h2 id='heading'>Create A Guide</h2>
-    <section class="add-padding">
-      <label>Choose to write a guide for:</label>
-      
-        <div class="span">
-          <button class="choice" id="course-button">Course</button>
-          <button class="choice" id="competition-button">Competition</button>
-        </div>
-        <section class="add-padding"></section>
-        <!-- <h3 id='heading'>Course Guide</h3> -->
-      <form id="courseForm" action ="{% url 'submit_courses'%}" method="post"  enctype="multipart/form-data">
-        {% csrf_token %}
-          <div class="form-group">
-            <label>Name of Course</label>
-            <input type="text" name="name_of_course" class="form-control">
-          </div>
-          <br>
-          <div class="form-group">
-            <label>Author</label>
-            <input type="text" name="author" class="form-control">
-          </div>
-          <br>
-          <div class="form-group">
-            <label>Upload Markdown File</label>
-            <p>
-              (Please include the Course Description and Recommended Resources. You can use Macdown for Mac systems and Typora for Windows systems to create this file)
-            </p>
-            <input type="file" class="form-control" id="myFile" name="course_description">
+<h2 id='heading'>Create A Guide</h2>
+<section class="add-padding">
+  <label>Choose to write a guide for:</label>
+  
+  <div class="span">
+    <button class="choice" id="course-button">Course</button>
+    <button class="choice" id="competition-button">Competition</button>
+  </div>
+  <section class="add-padding"></section>
+  <p>Please fill in all boxes, or else data will not be validated.</p>
+  <p class="error-message" >{{ error_overall_message }}</p>
+  <!-- Course Form -->
+  <form id="courseForm" action="{% url 'submit_courses' %}" method="post" enctype="multipart/form-data">
+    {% csrf_token %}
+    <input type="hidden" name="active_form" value="course" id="activeFormInput">
+    <div class="form-group">
+      <label>Name of Course</label>
+      <input type="text" name="name_of_course" class="form-control" value="{{ name_of_course }}" required pattern=".*\S.*">
+    </div>
+    <br>
+    <div class="form-group">
+      <label>Author</label>
+      <input type="text" name="author" class="form-control" value="{{ author }}">
+    </div>
+    <br>
+    <div class="form-group">
+      <label>Upload Markdown File</label>
+      <p>(Please include the Course Description and Recommended Resources. You can use Macdown for Mac systems and Typora for Windows systems to create this file)</p>
+      <input type="file" class="form-control" id="myFile" name="course_description">
+      <p class="error-message" >{{ error_message }}</p>
+    </div>
+    <br>
+    <div class="form-group">
+      <label>Course Category</label>
+      <select name="course_category" class="form-select" aria-label="Default select example">
+        <option selected>Open this select menu</option>
+        <option value="Math">Math</option>
+        <option value="English">English</option>
+        <option value="Science">Science</option>
+        <option value="Humanities">Humanities</option>
+        <option value="Others">Others</option>
+      </select>
+    </div>
+    <br>
+    <div class="form-group">
+      <label>Image URL for heading image</label>
+      <input type="text" name="image_url" class="form-control" value="{{ url_of_image }}">
+    </div>
+    <br>
+    <button class="submit-button" type="submit">Submit</button>
+  </form>
 
-
-            
-          </div>
-          
-          <br>
-          <div class="form-group">
-              <label>Course Category</label>
-              <select name="course_category" class="form-select" aria-label="Default select example">
-                  <option selected>Open this select menu</option>
-                  <option value="Math">Math</option>
-                  <option value="English">English</option>
-                  <option value="Science">Science</option>
-                  <option value="Humanities">Humanities</option>
-                  <option value="Others">Others</option>
-              </select>
-          </div><br>
-
-          <div class="form-group">
-            <label>Image URL for heading image</label>
-            <input type="text" name="image_url" class="form-control">
-          </div>
-          <br>
-          <button class="submit-button" type="submit">Submit</button>
-
-      </form>
-      
-      <!-- <h3 id='heading'>Competition Guide</h3> -->
-      <form id="competitionForm" action ="{% url 'submit_competitions'%}" method="post" enctype="multipart/form-data">
-        {% csrf_token %}
-          <div class="form-group">
-            
-            <label>Name of Competition</label>
-            
-            <input label="Name of Competition" type="text" name="name_of_competition" class="form-control">
-          </div>
-          <br>
-          <div class="form-group">
-            <label>Author</label>
-            <input type="text" name="author" class="form-control">
-          </div>
-          <br>
-          <div class="form-group">
-            <label>Upload Markdown File</label>
-            
-            <p>
-              (Please include the Competition Description and Recommended Resources. You can use Macdown for Mac systems and Typora for Windows systems to create this file)
-            </p>
-            <input type="file" class="form-control" id="myFile" name="competition_description">
-
-          </div>
-          <br>
-          <div class="form-group">
-              <label>Competition Category</label>
-              <select name="competition_category" class="form-select" aria-label="Default select example">
-                  <option selected>Open this select menu</option>
-                  <option value="Math">Math</option>
-                  <option value="Economics">Economics</option>
-                  <option value="Biology">Biology</option>
-                  <option value="Chemistry">Chemistry</option>
-                  <option value="Physics">Physics</option>
-                  <option value="Others">Others</option>
-              </select>
-          </div><br>
-
-          <div class="form-group">
-            <label>Image URL for heading image</label>
-            <input type="text" name="image_url" class="form-control">
-          </div><br>
-
-          <button class="submit-button" type="submit">Submit</button>
-
-      </form>
-    <container class="bottom-hint"><p> Don't know how to use markdown? Don't worry send us an email at scbsresourceweb.outlook.com with the above information and we will help you upload it to the website. </p>
-      <p> We will get back to you within a week and authenticate the post manually.</p>
-    </container>
-
-    </section>
-    
+  <!-- Competition Form -->
+  <form id="competitionForm" action="{% url 'submit_competitions' %}" method="post" enctype="multipart/form-data">
+    {% csrf_token %}
+    <input type="hidden" name="active_form" value="competition" id="activeFormInput">
+    <div class="form-group">
+      <label>Name of Competition</label>
+      <input label="Name of Competition" type="text" name="name_of_competition" class="form-control" value="{{ name_of_competition }}">
+    </div>
+    <br>
+    <div class="form-group">
+      <label>Author</label>
+      <input type="text" name="author" class="form-control" value="{{ author }}">
+    </div>
+    <br>
+    <div class="form-group">
+      <label>Upload Markdown File</label>
+      <p>(Please include the Competition Description and Recommended Resources. You can use Macdown for Mac systems and Typora for Windows systems to create this file)</p>
+      <input type="file" class="form-control" id="myFile" name="competition_description">
+      <p class="error-message">{{ error_message }}</p>
+    </div>
+    <br>
+    <div class="form-group">
+      <label>Competition Category</label>
+      <select name="competition_category" class="form-select" aria-label="Default select example">
+        <option selected>Open this select menu</option>
+        <option value="Math">Math</option>
+        <option value="Economics">Economics</option>
+        <option value="Biology">Biology</option>
+        <option value="Chemistry">Chemistry</option>
+        <option value="Physics">Physics</option>
+        <option value="Others">Others</option>
+      </select>
+    </div>
+    <br>
+    <div class="form-group">
+      <label>Image URL for heading image</label>
+      <input type="text" name="image_url" class="form-control" value="{{ url_of_image }}">
+    </div>
+    <br>
+    <button class="submit-button" type="submit">Submit</button>
+  </form>
+  <container class="bottom-hint"><p>Don't know how to use markdown? Don't worry send us an email at scbsresourceweb.outlook.com with the above information and we will help you upload it to the website. We will get back to you within a week and authenticate the post manually.</p></container>
+</section>
 {% endblock %}
