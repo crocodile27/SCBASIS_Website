@@ -145,7 +145,7 @@ def submit_competitions(request):
                 request,
                 "scbasis/create_guides.html",
                 {
-                    "error_overall_message": "Please fill in missing field.",
+                    "error_overall_message": "Please fill in missing field/s.",
                     "name_of_competition": name_of_competition,
                     "author": author,
                     "competition_category": competition_category,
